@@ -1,6 +1,6 @@
 import { v1 } from "uuid";
 
-import { ContactType, ContextInputType } from "../../types/contact";
+import { ContactType, ContactInputType } from "../../types/contact";
 
 enum LOCAL_STORAGE_KEY {
   CONTACT = "CONTACT",
@@ -40,7 +40,7 @@ class LocalStorageService {
     return contact;
   };
 
-  public createContactWithId = (data: ContextInputType): ContactType => {
+  public createContact = (data: ContactInputType): ContactType => {
     const id = v1();
     const newContact = { id, ...data };
     const stringifiedContact = JSON.stringify(newContact);
@@ -51,7 +51,7 @@ class LocalStorageService {
     return newContact;
   };
 
-  public updateContactWithId = (id: string, data: ContextInputType): ContactType => {
+  public updateContact = (id: string, data: ContactInputType): ContactType => {
     const updatedContact = { id, ...data };
     const stringifiedContact = JSON.stringify(updatedContact);
 
@@ -59,7 +59,7 @@ class LocalStorageService {
     return updatedContact;
   };
 
-  public removeContactWithId = (id: string): boolean => {
+  public deleteContact = (id: string): boolean => {
     localStorage.removeItem(LOCAL_STORAGE_KEY + id);
 
     this.removeContactFromList(id);
@@ -86,7 +86,7 @@ class LocalStorageService {
 
   public removeContactFromList = (id: string) => {
     const previousContactList = this.getContactList();
-    const newContactList = previousContactList.filter((item) => item === id);
+    const newContactList = previousContactList.filter((item) => item !== id);
     this.setContactList(newContactList);
   };
 
@@ -108,7 +108,7 @@ class LocalStorageService {
 
   public removeFavorite = (id: string) => {
     const previousFavoriteContactList = this.getFavoriteContactList();
-    const newFavoriteContactList = previousFavoriteContactList.filter((item) => item === id);
+    const newFavoriteContactList = previousFavoriteContactList.filter((item) => item !== id);
     this.setFavoriteContactList(newFavoriteContactList);
   };
 

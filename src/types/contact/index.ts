@@ -5,7 +5,7 @@ export type ContactType = {
   phoneNumber?: string;
 };
 
-export type ContextInputType = {
+export type ContactInputType = {
   name: string;
   email: string;
   phoneNumber?: string;
