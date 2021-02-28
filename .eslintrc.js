@@ -14,12 +14,11 @@ module.exports = {
             jsx: true,
         },
     },
-    rules: {
-        "endOfLine": "auto"
-    },
+    rules: {},
     settings: {
         react: {
             version: "detect",
         },
     },
+    "ignorePatterns": [".eslintrc.js"]
 };

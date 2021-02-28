@@ -7,4 +7,5 @@ module.exports = {
     "orderedImports": true,
     "bracketSpacing": true,
     "jsxBracketSameLine": false,
+    "endOfLine": "auto"
 };
