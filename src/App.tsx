@@ -15,8 +15,8 @@ function App(): ReactElement {
       <ThemeProvider theme={ThemeConfig}>
         <RoledexContextProvider>
           <BaseLayout>
-            <ContactListContainer />
             <FavoriteContactListContainer />
+            <ContactListContainer />
           </BaseLayout>
         </RoledexContextProvider>
       </ThemeProvider>

@@ -43,7 +43,7 @@ const ThemeConfig = {
     `,
     body01: css`
       font-size: 16px;
-      line-height: 24px;
+      line-height: 32px;
     `,
     body02: css`
       font-size: 14px;
