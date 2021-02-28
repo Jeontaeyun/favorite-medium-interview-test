@@ -4,7 +4,7 @@ import styled from "@emotion/styled";
 import FMButton from "../../component/button/FMButton";
 import ContactForm from "../../component/form/ContactForm";
 import { RoledexContext } from "../../lib/context/RoledexContextProvider";
-import { ContactType } from "../../types/contact";
+import { ContactInputType, ContactType } from "../../types/contact";
 import LocalStorageService from "../../lib/service/LocalStorageService";
 import SimpleContactCard from "../../component/card/SimpleContactCard";
 
@@ -29,9 +29,13 @@ function ContactListContainer() {
     setContactFormModalConfig({ visible: true, isUpdate: false, previousData: null });
   }, []);
 
-  const onSubmitContact = useCallback(() => {
-    setContactFormModalConfig({ visible: false, isUpdate: false, previousData: null });
-  }, []);
+  const onSubmitContact = useCallback(
+    (data: ContactInputType) => {
+      createContact(data);
+      setContactFormModalConfig({ visible: false, isUpdate: false, previousData: null });
+    },
+    [createContact]
+  );
 
   return (
     <Container>
