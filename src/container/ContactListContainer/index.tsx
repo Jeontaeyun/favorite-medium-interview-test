@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 
 import FMButton from "../../component/button/FMButton";
 import ContactForm from "../../component/form/ContactForm";
-import { RoledexContext } from "../../lib/context/RoledexContextProvider";
-import { ContactInputType, ContactType } from "../../types/contact";
-import LocalStorageService from "../../lib/service/LocalStorageService";
 import SimpleContactCard from "../../component/card/SimpleContactCard";
+import { RoledexContext } from "../../lib/context/RoledexContextProvider";
+import LocalStorageService from "../../lib/service/LocalStorageService";
+import { ContactInputType, ContactType } from "../../types/contact";
 
 function ContactListContainer() {
   const { contactList, createContact, deleteContact, addFavorite, removeFavorite, checkIsFavorited } = useContext(
@@ -59,7 +59,7 @@ function ContactListContainer() {
         />
       );
     });
-  }, [contactList, checkIsFavorited]);
+  }, [contactList, checkIsFavorited, onClickFavoriteButton, onDeleteContactButton, onEditContactButton]);
 
   const onClickNewContactButton = useCallback(() => {
     setContactFormModalConfig({ visible: true, isUpdate: false, previousData: null });
@@ -67,6 +67,8 @@ function ContactListContainer() {
 
   const onSubmitContact = useCallback(
     (data: ContactInputType) => {
+      if (!data.name) return alert("You need to register name");
+      if (!data.email) return alert("You need to register email");
       createContact(data);
       setContactFormModalConfig({ visible: false, isUpdate: false, previousData: null });
     },
