@@ -14,7 +14,9 @@ module.exports = {
             jsx: true,
         },
     },
-    rules: {},
+    rules: {
+        "@typescript-eslint/no-empty-function": ["off"]
+    },
     settings: {
         react: {
             version: "detect",

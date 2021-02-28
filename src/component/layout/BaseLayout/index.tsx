@@ -9,6 +9,13 @@ function BaseLayout({ children }: BaseLayoutProps) {
   return <Container>{children}</Container>;
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: ${(props) => props.theme.colors.gray00};
+`;
 
 export default React.memo(BaseLayout);

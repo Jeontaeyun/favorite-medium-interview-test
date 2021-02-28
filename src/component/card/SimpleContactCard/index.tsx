@@ -20,8 +20,6 @@ function SimpleContactCard({ name, email, phoneNumber = "" }: SimpleContactCardP
 const Container = styled.div`
   width: 100%;
   height: auto;
-  max-width: 425px;
-  min-height: 300px;
 `;
 
 const NameText = styled.q``;

@@ -6,16 +6,19 @@ import ContactListContainer from "./container/ContactListContainer";
 import FavoriteContactListContainer from "./container/FavoriteContactListContainer";
 import GlobalStyleConfig from "./assets/style/global-style";
 import ThemeConfig from "./assets/style/theme-config";
+import RoledexContextProvider from "./lib/context/RoledexContextProvider";
 
 function App(): ReactElement {
   return (
     <>
       <Global styles={GlobalStyleConfig} />
       <ThemeProvider theme={ThemeConfig}>
-        <BaseLayout>
-          <ContactListContainer />
-          <FavoriteContactListContainer />
-        </BaseLayout>
+        <RoledexContextProvider>
+          <BaseLayout>
+            <ContactListContainer />
+            <FavoriteContactListContainer />
+          </BaseLayout>
+        </RoledexContextProvider>
       </ThemeProvider>
     </>
   );
