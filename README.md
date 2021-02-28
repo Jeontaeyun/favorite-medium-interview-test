@@ -10,6 +10,7 @@ This project is for favorite medium coding test with simple roledex. This projec
 | Storage              | localStorage                                                      |
 | For Handling State   | Context API(React)                                                |
 | linting & formatting | es-lint, prettier                                                 |
+| package-manage       | yarn                                                              |
 
 # Overall Description
 
