@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { ContactInputType } from "../../../types/contact";
 import LocalStorageService from "../../service/LocalStorageService";
 
@@ -52,6 +52,12 @@ function RoledexContextProvider({ children }: RoledexContextProviderPropType) {
 
   const removeFavorite = useCallback((targetId: string) => {
     setFavoriteContactList((prev) => prev.filter((id) => id !== targetId));
+  }, []);
+
+  useEffect(() => {
+    const result = LocalStorageService.shared.init();
+    setContactList(result.contactList);
+    setFavoriteContactList(result.favoriteContactList);
   }, []);
 
   return (

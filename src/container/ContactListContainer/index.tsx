@@ -19,7 +19,7 @@ function ContactListContainer() {
   const ContactCardList = useMemo(() => {
     return contactList.map((id) => {
       const item = LocalStorageService.shared.getContactWithId(id);
-
+      console.log(item);
       if (!item) return null;
       return <SimpleContactCard key={item.id} name={item.name} email={item.email} phoneNumber={item.phoneNumber} />;
     });

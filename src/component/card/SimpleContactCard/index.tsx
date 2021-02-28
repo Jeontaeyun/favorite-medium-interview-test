@@ -1,31 +1,95 @@
-import React from "react";
+import React, { MouseEvent } from "react";
 import styled from "@emotion/styled";
+
+import FMButton from "../../button/FMButton";
 
 export type SimpleContactCardPropType = {
   name: string;
   email: string;
   phoneNumber?: string;
+  favorited?: boolean;
+  onClickFavoriteButton?: (event: MouseEvent<HTMLDivElement>) => void;
+  onClickEditButton?: (event: MouseEvent<HTMLButtonElement>) => void;
+  onClickDeleteButton?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
-function SimpleContactCard({ name, email, phoneNumber = "" }: SimpleContactCardPropType) {
+function SimpleContactCard({
+  name,
+  email,
+  phoneNumber = "",
+  favorited = false,
+  onClickFavoriteButton,
+  onClickEditButton,
+  onClickDeleteButton,
+}: SimpleContactCardPropType) {
   return (
     <Container>
-      <NameText>{name}</NameText>
-      <EmailText>{email}</EmailText>
-      <PhoneNumberText>{phoneNumber}</PhoneNumberText>
+      <FavoriteButton onClick={onClickFavoriteButton} favorited={favorited} />
+      <InfoContainer>
+        <NameText>{name}</NameText>
+        <ContactInfoContainer>
+          <EmailText>{email}</EmailText>
+          <PhoneNumberText>{phoneNumber}</PhoneNumberText>
+        </ContactInfoContainer>
+      </InfoContainer>
+      <ButtonContainer>
+        <FMButton onClick={onClickEditButton}>{"EDIT"}</FMButton>
+        <FMButton onClick={onClickDeleteButton}>{"DELETE"}</FMButton>
+      </ButtonContainer>
     </Container>
   );
 }
 
 const Container = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   width: 100%;
   height: auto;
+  box-sizing: border-box;
+  padding: 10px;
 `;
 
-const NameText = styled.q``;
+const FavoriteButton = styled.div<{ favorited: boolean }>`
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  border-radius: 18px;
+  border: 1px solid ${(props) => props.theme.colors.main01};
+  background-color: ${(props) => props.favorited && props.theme.colors.main01};
+  margin-right: 24px;
+  margin-left: 12px;
+`;
 
-const EmailText = styled.q``;
+const InfoContainer = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`;
 
-const PhoneNumberText = styled.q``;
+const ContactInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 12px;
+`;
+
+const NameText = styled.q`
+  ${(props) => props.theme.fonts.title3}
+`;
+
+const EmailText = styled.q`
+  ${(props) => props.theme.fonts.caption}
+`;
+
+const PhoneNumberText = styled.q`
+  ${(props) => props.theme.fonts.caption}
+`;
+
+const ButtonContainer = styled.div`
+  height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
 
 export default React.memo(SimpleContactCard);

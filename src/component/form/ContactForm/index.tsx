@@ -10,12 +10,16 @@ type ContactFormProps = {
 function ContactForm({ onSubmit }: ContactFormProps) {
   const [formData, setFormData] = useState({ name: "", email: "", phoneNumber: "" });
 
-  const onChangeInput = useCallback((event: ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = event.target;
-    if (id === "name") setFormData((prev) => ({ ...prev, name: value }));
-    if (id === "email") setFormData((prev) => ({ ...prev, email: value }));
-    if (id === "phoneNumber") setFormData((prev) => ({ ...prev, phoneNumber: value }));
-  }, []);
+  const onChangeInput = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      const { id, value } = event.target;
+      if (id === "name") setFormData((prev) => ({ ...prev, name: value }));
+      if (id === "email") setFormData((prev) => ({ ...prev, email: value }));
+      if (id === "phoneNumber") setFormData((prev) => ({ ...prev, phoneNumber: value }));
+      console.log(formData);
+    },
+    [formData]
+  );
 
   const onSubmitForm = useCallback(
     (event: FormEvent) => {
@@ -34,11 +38,11 @@ function ContactForm({ onSubmit }: ContactFormProps) {
         </FMInputContainer>
         <FMInputContainer>
           <FMLabel htmlFor={"email"}>{"Email"}</FMLabel>
-          <FMInput id={"email"} />
+          <FMInput id={"email"} onChange={onChangeInput} />
         </FMInputContainer>
         <FMInputContainer>
           <FMLabel htmlFor={"phoneNumber"}>{"Phone Number"}</FMLabel>
-          <FMInput id={"phoneNumber"} />
+          <FMInput id={"phoneNumber"} onChange={onChangeInput} />
         </FMInputContainer>
       </FormContainer>
       <FMButton onClick={onSubmitForm}>{"Submit"}</FMButton>

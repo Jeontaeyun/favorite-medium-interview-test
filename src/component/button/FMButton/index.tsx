@@ -11,19 +11,18 @@ function FMButton({ children, onClick }: FMButtonPropType) {
 }
 
 const Container = styled.button`
+  ${(props) => props.theme.fonts.body02}
   cursor: pointer;
-  font-size: 16px;
-  color: white;
-  line-height: 24px;
-  background: #e20078;
+  color: #e20078;
   border-radius: 4px;
-  padding: 6px 24px;
-  border: none;
+  padding: 6px 12px;
+  border: 1px solid #e20078;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   &:active {
-    background: #ab0f62;
+    color: #ab0f62;
+    border: 1px solid #ab0f62;
   }
   &:focus {
     outline: none;
