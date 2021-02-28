@@ -40,6 +40,7 @@ function RoledexContextProvider({ children }: RoledexContextProviderPropType) {
   const updateContact = useCallback((targetId: string, data: ContactInputType) => {
     LocalStorageService.shared.updateContact(targetId, data);
     setContactList((prev) => [...prev]);
+    setFavoriteContactList((prev) => [...prev]);
   }, []);
 
   const deleteContact = useCallback((targetId: string) => {

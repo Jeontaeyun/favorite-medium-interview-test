@@ -106,6 +106,7 @@ const ResetStyle = css`
   }
   body {
     line-height: 1;
+    overflow-y: none;
   }
   ol,
   ul {

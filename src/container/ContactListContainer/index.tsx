@@ -6,12 +6,18 @@ import ContactForm from "../../component/form/ContactForm";
 import SimpleContactCard from "../../component/card/SimpleContactCard";
 import { RoledexContext } from "../../lib/context/RoledexContextProvider";
 import LocalStorageService from "../../lib/service/LocalStorageService";
-import { ContactInputType, ContactType } from "../../types/contact";
+import { ContactType } from "../../types/contact";
 
 function ContactListContainer() {
-  const { contactList, createContact, deleteContact, addFavorite, removeFavorite, checkIsFavorited } = useContext(
-    RoledexContext
-  );
+  const {
+    contactList,
+    createContact,
+    updateContact,
+    deleteContact,
+    addFavorite,
+    removeFavorite,
+    checkIsFavorited,
+  } = useContext(RoledexContext);
   const [contactFormModalConfig, setContactFormModalConfig] = useState({
     visible: false,
     isUpdate: false,
@@ -41,6 +47,21 @@ function ContactListContainer() {
     [deleteContact]
   );
 
+  const onClickNewContactButton = useCallback(() => {
+    setContactFormModalConfig({ visible: true, isUpdate: false, previousData: null });
+  }, []);
+
+  const onSubmitContact = useCallback(
+    (data: ContactType) => {
+      if (!data.name) return alert("You need to register name");
+      if (!data.email) return alert("You need to register email");
+      if (data.id) updateContact(data.id, data);
+      else createContact(data);
+      setContactFormModalConfig({ visible: false, isUpdate: false, previousData: null });
+    },
+    [createContact, updateContact]
+  );
+
   const ContactCardList = useMemo(() => {
     return contactList.map((id) => {
       const item = LocalStorageService.shared.getContactWithId(id);
@@ -61,27 +82,15 @@ function ContactListContainer() {
     });
   }, [contactList, checkIsFavorited, onClickFavoriteButton, onDeleteContactButton, onEditContactButton]);
 
-  const onClickNewContactButton = useCallback(() => {
-    setContactFormModalConfig({ visible: true, isUpdate: false, previousData: null });
-  }, []);
-
-  const onSubmitContact = useCallback(
-    (data: ContactInputType) => {
-      if (!data.name) return alert("You need to register name");
-      if (!data.email) return alert("You need to register email");
-      createContact(data);
-      setContactFormModalConfig({ visible: false, isUpdate: false, previousData: null });
-    },
-    [createContact]
-  );
-
   return (
     <Container>
       <ContactItemContainer>{ContactCardList}</ContactItemContainer>
       <ButtonContainer>
         <FMButton onClick={onClickNewContactButton}>{"New Contact"}</FMButton>
       </ButtonContainer>
-      {contactFormModalConfig.visible && <ContactForm onSubmit={onSubmitContact} />}
+      {contactFormModalConfig.visible && (
+        <ContactForm onSubmit={onSubmitContact} previousData={contactFormModalConfig.previousData} />
+      )}
     </Container>
   );
 }

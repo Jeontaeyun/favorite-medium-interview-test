@@ -2,9 +2,8 @@ import React, { useCallback, useContext, useMemo } from "react";
 import styled from "@emotion/styled";
 
 import { RoledexContext } from "../../lib/context/RoledexContextProvider";
-import SimpleContactCard from "../../component/card/SimpleContactCard";
 import LocalStorageService from "../../lib/service/LocalStorageService";
-import SImpeFavoriteContactCard from "../../component/card/SImpeFavoriteContactCard";
+import SimpleFavoriteContactCard from "../../component/card/SimpleFavoriteContactCard";
 
 function FavoriteContactListContainer() {
   const { favoriteContactList, addFavorite, removeFavorite, checkIsFavorited } = useContext(RoledexContext);
@@ -22,7 +21,7 @@ function FavoriteContactListContainer() {
       const favorited = checkIsFavorited(id);
       if (!item) return null;
       return (
-        <SImpeFavoriteContactCard
+        <SimpleFavoriteContactCard
           key={item.id}
           name={item.name}
           email={item.email}

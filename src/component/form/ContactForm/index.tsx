@@ -1,25 +1,22 @@
-import React, { ChangeEvent, FormEvent, useCallback, useState } from "react";
+import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import FMButton from "../../button/FMButton";
-import { ContactInputType } from "../../../types/contact";
+import { ContactType } from "../../../types/contact";
 
 type ContactFormProps = {
-  onSubmit: (formData: ContactInputType) => void;
+  onSubmit: (formData: ContactType) => void;
+  previousData: ContactType | null;
 };
 
-function ContactForm({ onSubmit }: ContactFormProps) {
-  const [formData, setFormData] = useState({ name: "", email: "", phoneNumber: "" });
+function ContactForm({ onSubmit, previousData }: ContactFormProps) {
+  const [formData, setFormData] = useState<ContactType>({ id: "", name: "", email: "", phoneNumber: "" });
 
-  const onChangeInput = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      const { id, value } = event.target;
-      if (id === "name") setFormData((prev) => ({ ...prev, name: value }));
-      if (id === "email") setFormData((prev) => ({ ...prev, email: value }));
-      if (id === "phoneNumber") setFormData((prev) => ({ ...prev, phoneNumber: value }));
-      console.log(formData);
-    },
-    [formData]
-  );
+  const onChangeInput = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = event.target;
+    if (id === "name") setFormData((prev) => ({ ...prev, name: value }));
+    if (id === "email") setFormData((prev) => ({ ...prev, email: value }));
+    if (id === "phoneNumber") setFormData((prev) => ({ ...prev, phoneNumber: value }));
+  }, []);
 
   const onSubmitForm = useCallback(
     (event: FormEvent) => {
@@ -29,20 +26,25 @@ function ContactForm({ onSubmit }: ContactFormProps) {
     [onSubmit, formData]
   );
 
+  useEffect(() => {
+    console.log(previousData);
+    if (previousData) setFormData(previousData);
+  }, [previousData]);
+
   return (
     <Container>
       <FormContainer>
         <FMInputContainer>
           <FMLabel htmlFor={"name"}>{"Name"}</FMLabel>
-          <FMInput id={"name"} onChange={onChangeInput} />
+          <FMInput id={"name"} onChange={onChangeInput} value={formData.name} />
         </FMInputContainer>
         <FMInputContainer>
           <FMLabel htmlFor={"email"}>{"Email"}</FMLabel>
-          <FMInput id={"email"} onChange={onChangeInput} />
+          <FMInput id={"email"} onChange={onChangeInput} value={formData.email} />
         </FMInputContainer>
         <FMInputContainer>
           <FMLabel htmlFor={"phoneNumber"}>{"Phone Number"}</FMLabel>
-          <FMInput id={"phoneNumber"} onChange={onChangeInput} />
+          <FMInput id={"phoneNumber"} onChange={onChangeInput} value={formData.phoneNumber} />
         </FMInputContainer>
       </FormContainer>
       <FMButton onClick={onSubmitForm}>{"Submit"}</FMButton>
