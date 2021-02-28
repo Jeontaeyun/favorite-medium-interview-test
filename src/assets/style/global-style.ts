@@ -136,6 +136,7 @@ const GlobalStyleConfig = css`
     &::selection {
       background-color: transparent;
     }
+    background: ${ThemeConfig.colors.gray00};
   }
   h1,
   h2,

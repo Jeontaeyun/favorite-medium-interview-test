@@ -15,8 +15,8 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 100vh;
-  background: ${(props) => props.theme.colors.gray00};
+  padding-top: 80px;
+  padding-bottom: 80px;
 `;
 
 export default React.memo(BaseLayout);

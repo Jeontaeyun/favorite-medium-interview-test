@@ -50,7 +50,7 @@ const Container = styled.div`
   transform: translate(-50%, -50%);
   z-index: 100;
   width: 90%;
-  min-width: 260px;
+  min-width: 300px;
   min-height: 300px;
   background: ${(props) => props.theme.colors.gray00};
   border-radius: 8px;
@@ -59,24 +59,31 @@ const Container = styled.div`
 
 const FormContainer = styled.form`
   flex: 1;
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  min-width: 300px;
 `;
 
 const FMInputContainer = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: row;
   align-items: center;
+  box-sizing: border-box;
   padding: 8px 12px;
 `;
 
 const FMInput = styled.input`
-  flex: 1;
+  width: 100%;
+
   ${(props) => props.theme.fonts.body01}
-  height: 32px;
-  padding: 0px 12px;
+  box-sizing: border-box;
+  border: 1px solid;
+  border-radius: 4px;
   &:focus {
     outline-color: #e20078;
   }
@@ -85,7 +92,7 @@ const FMInput = styled.input`
 const FMLabel = styled.label`
   display: inline-block;
   ${(props) => props.theme.fonts.body01}
-  width: 140px;
+  width: 120px;
 `;
 
 export default React.memo(ContactForm);

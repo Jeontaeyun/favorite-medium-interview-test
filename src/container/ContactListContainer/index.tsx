@@ -51,6 +51,7 @@ const Container = styled.div`
   width: 100%;
   height: auto;
   max-width: 425px;
+  min-width: 320px;
   min-height: 600px;
 `;
 
