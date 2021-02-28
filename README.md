@@ -16,11 +16,23 @@ This project is for favorite medium coding test with simple roledex. This projec
 
 This project is just for coding test, but recently I learn about SRS(Software Requirements Specification). So I'm going to use that form with `README.md` (**Customized Simple SRS**). And our requirements is that:
 
-1. Main page is contact list(lists of all contacts, lists of favorite contacts)
+1. Main page is contact list (lists of all contacts, lists of favorite contacts)
 2. Can create contact with specified validation
 3. Can update exist contact
-4. Can favorite on/off with contact(should disappear contact when unfavorite)
-5. persistent is required(So, we're going to use `localStorage` API)
+4. Can favorite on/off with contact (should disappear contact when unfavorite)
+5. persistent is required (so, we're going to use `localStorage` API)
+
+Our main project directory is `src` and below is project directory structure:
+
+| Directory   | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| `component` | directory for simple ui(no logic, only visual ui)    |
+| `container` | directory for container(has action and data)         |
+| `assets`    | assets directory like global style, or design system |
+| `lib`       | some api or custom hooks                             |
+
+This project doesn't have `pages` directory because it is simple page application with no routing.
+It only works with `state` change (like `shouldCreateContact`, `shouldEditContact`) because of its simple requirements.
 
 # System Feature
 
