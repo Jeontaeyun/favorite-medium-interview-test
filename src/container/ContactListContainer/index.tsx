@@ -7,6 +7,7 @@ import SimpleContactCard from "../../component/card/SimpleContactCard";
 import { RoledexContext } from "../../lib/context/RoledexContextProvider";
 import LocalStorageService from "../../lib/service/LocalStorageService";
 import { ContactType } from "../../types/contact";
+import ContainerLabel from "../../component/layout/ContainerLabel";
 
 function ContactListContainer() {
   const {
@@ -84,15 +85,18 @@ function ContactListContainer() {
   }, [contactList, checkIsFavorited, onClickFavoriteButton, onDeleteContactButton, onEditContactButton]);
 
   return (
-    <Container>
-      <ContactItemContainer>{ContactCardList}</ContactItemContainer>
-      <ButtonContainer>
-        <FMButton onClick={onClickNewContactButton}>{"New Contact"}</FMButton>
-      </ButtonContainer>
-      {contactFormModalConfig.visible && (
-        <ContactForm onSubmit={onSubmitContact} previousData={contactFormModalConfig.previousData} />
-      )}
-    </Container>
+    <>
+      <ContainerLabel>{"CONTACTS"}</ContainerLabel>
+      <Container>
+        <ContactItemContainer>{ContactCardList}</ContactItemContainer>
+        <ButtonContainer>
+          <FMButton onClick={onClickNewContactButton}>{"New Contact"}</FMButton>
+        </ButtonContainer>
+        {contactFormModalConfig.visible && (
+          <ContactForm onSubmit={onSubmitContact} previousData={contactFormModalConfig.previousData} />
+        )}
+      </Container>
+    </>
   );
 }
 

@@ -4,6 +4,7 @@ import styled from "@emotion/styled";
 import { RoledexContext } from "../../lib/context/RoledexContextProvider";
 import LocalStorageService from "../../lib/service/LocalStorageService";
 import SimpleFavoriteContactCard from "../../component/card/SimpleFavoriteContactCard";
+import ContainerLabel from "../../component/layout/ContainerLabel";
 
 function FavoriteContactListContainer() {
   const { favoriteContactList, addFavorite, removeFavorite, checkIsFavorited } = useContext(RoledexContext);
@@ -32,7 +33,12 @@ function FavoriteContactListContainer() {
       );
     });
   }, [favoriteContactList, onClickFavoriteButton]);
-  return <Container>{FavoriteContactCardList}</Container>;
+  return (
+    <>
+      <ContainerLabel>{"FAVOIRTE"}</ContainerLabel>
+      <Container>{FavoriteContactCardList}</Container>
+    </>
+  );
 }
 
 const Container = styled.div`
