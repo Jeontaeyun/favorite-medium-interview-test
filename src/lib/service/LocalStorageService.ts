@@ -17,14 +17,14 @@ class LocalStorageService {
     LocalStorageService._instance = this;
   }
 
-  public static get shared() {
+  public static get shared(): LocalStorageService {
     if (!LocalStorageService._instance) {
       LocalStorageService._instance = new LocalStorageService();
     }
     return LocalStorageService._instance;
   }
 
-  public init = () => {
+  public init = (): { contactList: string[]; favoriteContactList: string[] } => {
     this.isLoading = true;
     const contactList: string[] = this.parseJSON(localStorage.getItem(LOCAL_STORAGE_KEY.CONTACT_LIST), []);
     const favoriteContactList: string[] = this.parseJSON(
@@ -79,12 +79,12 @@ class LocalStorageService {
     return contactList;
   };
 
-  public addContactToList = (id: string) => {
+  public addContactToList = (id: string): void => {
     const previousContactList = this.getContactList();
     this.setContactList([id, ...previousContactList]);
   };
 
-  public removeContactFromList = (id: string) => {
+  public removeContactFromList = (id: string): void => {
     const previousContactList = this.getContactList();
     const newContactList = previousContactList.filter((item) => item !== id);
     this.setContactList(newContactList);
@@ -101,17 +101,18 @@ class LocalStorageService {
     return contactList;
   };
 
-  public addFavorite = (id: string) => {
+  public addFavorite = (id: string): void => {
     const previousFavoriteContactList = this.getFavoriteContactList();
     this.setFavoriteContactList([id, ...previousFavoriteContactList]);
   };
 
-  public removeFavorite = (id: string) => {
+  public removeFavorite = (id: string): void => {
     const previousFavoriteContactList = this.getFavoriteContactList();
     const newFavoriteContactList = previousFavoriteContactList.filter((item) => item !== id);
     this.setFavoriteContactList(newFavoriteContactList);
   };
 
+  //eslint-disable-next-line
   private parseJSON = (string: string | null, defaultValue: any = null) => {
     if (string) return JSON.parse(string);
     else return defaultValue;
