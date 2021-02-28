@@ -49,11 +49,19 @@ function RoledexContextProvider({ children }: RoledexContextProviderPropType) {
   }, []);
 
   const addFavorite = useCallback((targetId: string) => {
-    setFavoriteContactList((prev) => [...prev, targetId]);
+    setFavoriteContactList((prev) => {
+      const newFavoriteContactList = [...prev, targetId];
+      LocalStorageService.shared.setFavoriteContactList(newFavoriteContactList);
+      return newFavoriteContactList;
+    });
   }, []);
 
   const removeFavorite = useCallback((targetId: string) => {
-    setFavoriteContactList((prev) => prev.filter((id) => id !== targetId));
+    setFavoriteContactList((prev) => {
+      const newFavoriteContactList = prev.filter((id) => id !== targetId);
+      LocalStorageService.shared.setFavoriteContactList(newFavoriteContactList);
+      return newFavoriteContactList;
+    });
   }, []);
 
   const checkIsFavorited = useCallback(
