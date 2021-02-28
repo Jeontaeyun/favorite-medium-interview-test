@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from "react";
+import React, { useCallback, useContext, useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 
 import FMButton from "../../component/button/FMButton";
@@ -8,6 +8,7 @@ import { RoledexContext } from "../../lib/context/RoledexContextProvider";
 import LocalStorageService from "../../lib/service/LocalStorageService";
 import { ContactType } from "../../types/contact";
 import ContainerLabel from "../../component/layout/ContainerLabel";
+import { useOuterClickNotifier } from "../../lib/hook/useOuterClickNotifier";
 
 function ContactListContainer() {
   const {
@@ -19,6 +20,7 @@ function ContactListContainer() {
     removeFavorite,
     checkIsFavorited,
   } = useContext(RoledexContext);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [contactFormModalConfig, setContactFormModalConfig] = useState({
     visible: false,
     isUpdate: false,
@@ -52,6 +54,10 @@ function ContactListContainer() {
     setContactFormModalConfig({ visible: true, isUpdate: false, previousData: null });
   }, []);
 
+  const onHideContactFormModal = useCallback(() => {
+    setContactFormModalConfig({ visible: false, isUpdate: false, previousData: null });
+  }, []);
+
   const onSubmitContact = useCallback(
     (data: ContactType) => {
       if (!data.name) return alert("You need to register name");
@@ -63,6 +69,8 @@ function ContactListContainer() {
     },
     [createContact, updateContact]
   );
+
+  useOuterClickNotifier(onHideContactFormModal, containerRef);
 
   const ContactCardList = useMemo(() => {
     return contactList.map((id) => {
@@ -87,7 +95,7 @@ function ContactListContainer() {
   return (
     <>
       <ContainerLabel>{"CONTACTS"}</ContainerLabel>
-      <Container>
+      <Container ref={containerRef}>
         <ContactItemContainer>{ContactCardList}</ContactItemContainer>
         <ButtonContainer>
           <FMButton onClick={onClickNewContactButton}>{"New Contact"}</FMButton>
