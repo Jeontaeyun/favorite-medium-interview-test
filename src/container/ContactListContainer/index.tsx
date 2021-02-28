@@ -55,6 +55,7 @@ function ContactListContainer() {
     (data: ContactType) => {
       if (!data.name) return alert("You need to register name");
       if (!data.email) return alert("You need to register email");
+
       if (data.id) updateContact(data.id, data);
       else createContact(data);
       setContactFormModalConfig({ visible: false, isUpdate: false, previousData: null });

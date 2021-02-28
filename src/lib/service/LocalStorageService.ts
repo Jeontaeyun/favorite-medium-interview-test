@@ -42,7 +42,7 @@ class LocalStorageService {
 
   public createContact = (data: ContactInputType): ContactType => {
     const id = v1();
-    const newContact = { id, ...data };
+    const newContact = { ...data, id };
     const stringifiedContact = JSON.stringify(newContact);
 
     localStorage.setItem(LOCAL_STORAGE_KEY.CONTACT + id, stringifiedContact);
@@ -60,7 +60,8 @@ class LocalStorageService {
   };
 
   public deleteContact = (id: string): boolean => {
-    localStorage.removeItem(LOCAL_STORAGE_KEY + id);
+    console.log(id);
+    localStorage.removeItem(LOCAL_STORAGE_KEY.CONTACT + id);
 
     this.removeContactFromList(id);
     this.removeFavorite(id);

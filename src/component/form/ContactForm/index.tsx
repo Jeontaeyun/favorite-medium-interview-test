@@ -27,8 +27,7 @@ function ContactForm({ onSubmit, previousData }: ContactFormProps) {
   );
 
   useEffect(() => {
-    console.log(previousData);
-    if (previousData) setFormData(previousData);
+    if (previousData) setFormData((prev) => ({ ...prev, ...previousData }));
   }, [previousData]);
 
   return (
