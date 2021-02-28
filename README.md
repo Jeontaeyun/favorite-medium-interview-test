@@ -1,4 +1,4 @@
-# Introduction
+# 👋🏻 Introduction
 
 This project is for favorite medium coding test with simple roledex. This project has only FE side application and use next tech stack.
 
@@ -12,7 +12,7 @@ This project is for favorite medium coding test with simple roledex. This projec
 | linting & formatting | es-lint, prettier                                                 |
 | package-manage       | yarn                                                              |
 
-# Overall Description
+# 💎 Overall Description
 
 This project is just for coding test, but recently I learn about SRS(Software Requirements Specification). So I'm going to use that form with `README.md` (**Customized Simple SRS**). And our requirements is that:
 
@@ -34,11 +34,16 @@ Our main project directory is `src` and below is project directory structure:
 This project doesn't have `pages` directory because it is simple page application with no routing.
 It only works with `state` change (like `shouldCreateContact`, `shouldEditContact`) because of its simple requirements.
 
-# System Feature
+And our naming convention is that:
+
+- use **CamelCase** with React's `component` or `container` function, class, folder name
+- use **kebab-case** with other directory feature
+
+# 🛠 System Feature
 
 This project need only CRUD(Create, Read, Update, Delete) logic with user contact.
 
-# Non-Functional Requirements
+# 📃 Non-Functional Requirements
 
 We have some **non-functional requirements** with this project:
 
@@ -67,6 +72,6 @@ We have some **non-functional requirements** with this project:
 4. Well readable `README.md`
    - So, this project run with simple SRS(Software Requirements Specification) in `README.md`. I need to make it easy to read.
 
-# Other Requirements
+# 🖋 Other Requirements
 
 1. Due to 02.28.2021 (Send public git hub repository link)
