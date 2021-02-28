@@ -166,6 +166,11 @@ const GlobalStyleConfig = css`
       background-color: transparent;
     }
   }
+  button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  }
 `;
 
 export default GlobalStyleConfig;

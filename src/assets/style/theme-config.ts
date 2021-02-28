@@ -16,7 +16,7 @@ const ThemeConfig = {
 
     white: "#ffffff",
 
-    main01: "#0582F7",
+    main01: "#e20078",
 
     error: "#f03e3e",
   },
