@@ -14,6 +14,7 @@ type RoledexContextType = {
   deleteContact: (id: string) => void;
   addFavorite: (id: string) => void;
   removeFavorite: (id: string) => void;
+  checkIsFavorited: (id: string) => boolean;
 };
 
 export const RoledexContext = React.createContext<RoledexContextType>({
@@ -24,6 +25,7 @@ export const RoledexContext = React.createContext<RoledexContextType>({
   deleteContact: () => {},
   addFavorite: () => {},
   removeFavorite: () => {},
+  checkIsFavorited: () => false,
 });
 
 function RoledexContextProvider({ children }: RoledexContextProviderPropType) {
@@ -54,6 +56,13 @@ function RoledexContextProvider({ children }: RoledexContextProviderPropType) {
     setFavoriteContactList((prev) => prev.filter((id) => id !== targetId));
   }, []);
 
+  const checkIsFavorited = useCallback(
+    (targetId: string) => {
+      return favoriteContactList.includes(targetId);
+    },
+    [favoriteContactList]
+  );
+
   useEffect(() => {
     const result = LocalStorageService.shared.init();
     setContactList(result.contactList);
@@ -70,6 +79,7 @@ function RoledexContextProvider({ children }: RoledexContextProviderPropType) {
         deleteContact,
         addFavorite,
         removeFavorite,
+        checkIsFavorited,
       }}
     >
       {children}

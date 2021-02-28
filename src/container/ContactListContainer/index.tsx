@@ -9,21 +9,57 @@ import LocalStorageService from "../../lib/service/LocalStorageService";
 import SimpleContactCard from "../../component/card/SimpleContactCard";
 
 function ContactListContainer() {
-  const { contactList, createContact } = useContext(RoledexContext);
+  const { contactList, createContact, deleteContact, addFavorite, removeFavorite, checkIsFavorited } = useContext(
+    RoledexContext
+  );
   const [contactFormModalConfig, setContactFormModalConfig] = useState({
     visible: false,
     isUpdate: false,
     previousData: null as ContactType | null,
   });
 
+  const onClickFavoriteButton = useCallback(
+    (id: string) => () => {
+      const favorited = checkIsFavorited(id);
+      favorited ? removeFavorite(id) : addFavorite(id);
+    },
+    [addFavorite, removeFavorite, checkIsFavorited]
+  );
+
+  const onEditContactButton = useCallback(
+    (id: string) => () => {
+      const item = LocalStorageService.shared.getContactWithId(id);
+      setContactFormModalConfig({ visible: true, isUpdate: true, previousData: item });
+    },
+    []
+  );
+
+  const onDeleteContactButton = useCallback(
+    (id: string) => () => {
+      deleteContact(id);
+    },
+    [deleteContact]
+  );
+
   const ContactCardList = useMemo(() => {
     return contactList.map((id) => {
       const item = LocalStorageService.shared.getContactWithId(id);
-      console.log(item);
+      const favorited = checkIsFavorited(id);
       if (!item) return null;
-      return <SimpleContactCard key={item.id} name={item.name} email={item.email} phoneNumber={item.phoneNumber} />;
+      return (
+        <SimpleContactCard
+          key={item.id}
+          name={item.name}
+          email={item.email}
+          phoneNumber={item.phoneNumber}
+          favorited={favorited}
+          onClickFavoriteButton={onClickFavoriteButton(item.id)}
+          onClickDeleteButton={onDeleteContactButton(item.id)}
+          onClickEditButton={onEditContactButton(item.id)}
+        />
+      );
     });
-  }, [contactList]);
+  }, [contactList, checkIsFavorited]);
 
   const onClickNewContactButton = useCallback(() => {
     setContactFormModalConfig({ visible: true, isUpdate: false, previousData: null });
@@ -56,11 +92,11 @@ const Container = styled.div`
   height: auto;
   max-width: 425px;
   min-width: 320px;
-  min-height: 600px;
 `;
 
 const ContactItemContainer = styled.div`
-  flex: 1;
+  height: 100px;
+  min-height: 400px;
   border: 1px solid ${(props) => props.theme.colors.gray50};
   border-radius: 4px;
   overflow-y: scroll;

@@ -3,25 +3,21 @@ import styled from "@emotion/styled";
 
 import FMButton from "../../button/FMButton";
 
-export type SimpleContactCardPropType = {
+export type SimpleFavoriteContactCardPropType = {
   name: string;
   email: string;
   phoneNumber?: string;
   favorited?: boolean;
   onClickFavoriteButton?: (event: MouseEvent<HTMLDivElement>) => void;
-  onClickEditButton?: (event: MouseEvent<HTMLButtonElement>) => void;
-  onClickDeleteButton?: (event: MouseEvent<HTMLButtonElement>) => void;
 };
 
-function SimpleContactCard({
+function SimpleFavoriteContactCard({
   name,
   email,
   phoneNumber = "",
   favorited = false,
   onClickFavoriteButton,
-  onClickEditButton,
-  onClickDeleteButton,
-}: SimpleContactCardPropType) {
+}: SimpleFavoriteContactCardPropType) {
   return (
     <Container>
       <FavoriteButton onClick={onClickFavoriteButton} favorited={favorited} />
@@ -32,10 +28,6 @@ function SimpleContactCard({
           <PhoneNumberText>{phoneNumber}</PhoneNumberText>
         </ContactInfoContainer>
       </InfoContainer>
-      <ButtonContainer>
-        <FMButton onClick={onClickEditButton}>{"EDIT"}</FMButton>
-        <FMButton onClick={onClickDeleteButton}>{"DELETE"}</FMButton>
-      </ButtonContainer>
     </Container>
   );
 }
@@ -93,4 +85,4 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
 `;
 
-export default React.memo(SimpleContactCard);
+export default React.memo(SimpleFavoriteContactCard);
