@@ -14,6 +14,7 @@ This project is for favorite medium coding test with simple roledex. This projec
 
 # 💎 Overall Description
 
+### Requirements
 This project is just for coding test, but recently I learn about SRS(Software Requirements Specification). So I'm going to use that form with `README.md` (**Customized Simple SRS**). And our requirements is that:
 
 1. Main page is contact list (lists of all contacts, lists of favorite contacts)
@@ -21,6 +22,8 @@ This project is just for coding test, but recently I learn about SRS(Software Re
 3. Can update exist contact
 4. Can favorite on/off with contact (should disappear contact when unfavorite)
 5. persistent is required (so, we're going to use `localStorage` API)
+
+### Directory Structure
 
 Our main project directory is `src` and below is project directory structure:
 
@@ -34,14 +37,17 @@ Our main project directory is `src` and below is project directory structure:
 This project doesn't have `pages` directory because it is simple page application with no routing.
 It only works with `state` change (like `shouldCreateContact`, `shouldEditContact`) because of its simple requirements.
 
-And our naming convention is that:
+### Naming Conention
+
+Our naming convention is that:
 
 - use **CamelCase** with React's `component` or `container` function, class, folder name
 - use **kebab-case** with other directory feature
 
 # 🛠 System Feature
 
-This project need only CRUD(Create, Read, Update, Delete) logic with user contact.
+This project need only CRUD(Create, Read, Update, Delete) logic with user contact.  
+<img width="1062" alt="스크린샷 2021-03-01 오후 4 51 22" src="https://user-images.githubusercontent.com/34877121/109467368-6d34b100-7aae-11eb-9c06-e7340fcbfcbe.png">
 
 # 📃 Non-Functional Requirements
 
